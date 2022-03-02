@@ -21,3 +21,20 @@ const rabbit = {
 };
 
 rabbit.draw();
+
+// 비슷한 종류의 객체들이 필요한 경우, 클래스로 만들자
+class Rock {
+  constructor() {
+    this.x = 500;
+    this.y = 200;
+    this.width = 50;
+    this.height = 50;
+  }
+  draw() {
+    ctx.fillStyle = "gray";
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+}
+
+const rock = new Rock();
+rock.draw();
