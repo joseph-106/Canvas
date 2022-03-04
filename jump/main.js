@@ -22,11 +22,11 @@ const frog = {
 
 // 비슷한 종류의 객체들이 필요한 경우, 클래스로 만들자
 class Rock {
-  constructor(rockH) {
+  constructor() {
     this.x = canvas.width - 100;
     this.y = 200;
     this.width = 50;
-    this.height = rockH;
+    this.height = 50;
   }
   draw() {
     ctx.fillStyle = "gray";
@@ -46,13 +46,17 @@ function 프레임마다실행() {
   ctx.clearRect(0, 0, canvas.width, canvas.height); // 프레임마다 캔버스 비우기
   if (timer % 120 === 0) {
     // 일정 프레임마다 새로운 장애물 생성
-    const rock = new Rock(50);
+    const rock = new Rock();
     rocks.push(rock);
     rock.draw();
   }
   rocks.forEach((e) => {
     e.x -= 3;
     e.draw();
+    // 필요없어진 장애물 제거
+    if (e.x < -50) {
+      rocks.splice(0, 1);
+    }
   });
   frog.draw();
 }
