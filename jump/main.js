@@ -35,7 +35,9 @@ class Rock {
 }
 
 const rocks = []; // 비슷한 객체들을 배열로 관리
-let timer = 0; // 프레임 체크를 위한 타이머
+let timer = 0; // 전체 프레임 체크를 위한 타이머
+let 점프timer = 0; // 점프 프레임 체크를 위한 타이머
+let 점프중 = false; // 점프 상태
 
 // 프레임마다 코드 실행하기
 function 프레임마다실행() {
@@ -58,7 +60,31 @@ function 프레임마다실행() {
       rocks.splice(0, 1);
     }
   });
+  // 점프!
+  if (점프중 === true) {
+    frog.y -= 4;
+    점프timer++;
+  } else {
+    // 최소 높이
+    if (frog.y < 200) {
+      frog.y += 4;
+    }
+  } // 최대 점프 시간 = 최대 높이
+  if (점프timer === 40) {
+    점프중 = false;
+    점프timer = 0;
+  }
   frog.draw();
 }
 
 프레임마다실행();
+
+// 특정 키 입력 받으면 함수 실행
+document.addEventListener("keydown", function (e) {
+  if (e.code === "Space") {
+    // 중복 점프 방지
+    if (frog.y === 200) {
+      점프중 = true;
+    }
+  }
+});
