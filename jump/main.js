@@ -8,6 +8,10 @@ canvas.height = window.innerHeight - 100;
 // ctx.fillStyle = "green"; // 유닛 색상
 // ctx.fillRect(10, 10, 100, 100); // 왼쪽 위 (10, 10)에 100 * 100 사이즈 유닛
 
+// 개구리 사진
+const frogImg = new Image();
+frogImg.src = "frog.png";
+
 // 유닛 속성을 객체로 미리 정리해두면 편리함
 const frog = {
   x: 0,
@@ -15,8 +19,9 @@ const frog = {
   width: 50,
   height: 50,
   draw() {
-    ctx.fillStyle = "green";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    // ctx.fillStyle = "green";
+    // ctx.fillRect(this.x, this.y, this.width, this.height);
+    ctx.drawImage(frogImg, this.x, this.y, this.width, this.height);
   },
 };
 
