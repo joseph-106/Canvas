@@ -47,12 +47,13 @@ let animation;
 function 프레임마다실행() {
   animation = requestAnimationFrame(프레임마다실행);
   timer++;
+  document.getElementById("score").innerHTML = Math.floor(timer / 10); // 점수 표시
 
   // 실행할 내용
   ctx.clearRect(0, 0, canvas.width, canvas.height); // 프레임마다 캔버스 비우기
   // 캔버스 크기 반응형으로
   canvas.width = window.innerWidth - 20;
-  canvas.height = window.innerHeight - 20;
+  canvas.height = window.innerHeight - 50;
   // 계속 위에 덧칠하는 구조
   ctx.fillStyle = "#baa073";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -100,7 +101,7 @@ function 프레임마다실행() {
 function 충돌체크(frog, rock) {
   if (frog.x + frog.width - rock.x > 0 && frog.y + frog.height - rock.y > 0) {
     cancelAnimationFrame(animation); // 애니메이션 종료
-    alert(`점수: ${timer} 🐸`);
+    alert(`점수: ${Math.floor(timer / 10)} 🐸`);
     window.location.reload();
   }
 }
