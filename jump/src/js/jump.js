@@ -25,11 +25,11 @@ const frog = {
 
 // 비슷한 종류의 객체들이 필요한 경우, 클래스로 만들자
 class Rock {
-  constructor() {
+  constructor(height) {
     this.x = canvas.width - 100;
-    this.y = 200;
+    this.y = 250 - height;
     this.width = 50;
-    this.height = 50;
+    this.height = height;
   }
   draw() {
     ctx.fillStyle = "gray";
@@ -60,12 +60,13 @@ function 프레임마다실행() {
   ctx.fillRect(0, 0, canvas.width, 250);
   if (timer % 120 === 0) {
     // 일정 프레임마다 새로운 장애물 생성
-    const rock = new Rock();
+    const randomHeight = (Math.floor(Math.random() * 4) + 4) * 10;
+    const rock = new Rock(randomHeight); // 장애물 높이 40, 50, 60, 70 중 랜덤
     rocks.push(rock);
     rock.draw();
   }
   rocks.forEach((e) => {
-    e.x -= 3;
+    e.x -= 3; // 장애물 속도
     e.draw();
 
     // 필요없어진 장애물 제거
