@@ -10,7 +10,7 @@ canvas.height = window.innerHeight - 100;
 
 // 개구리 사진
 const frogImg = new Image();
-frogImg.src = "frog.png";
+frogImg.src = "images/frog.png";
 
 // 유닛 속성을 객체로 미리 정리해두면 편리함
 const frog = {
