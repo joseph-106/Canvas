@@ -113,3 +113,11 @@ document.addEventListener("keydown", function (e) {
     }
   }
 });
+
+// 좌클릭시 점프
+document.addEventListener("click", function () {
+  // 중복 점프 방지
+  if (frog.y === 200) {
+    점프중 = true;
+  }
+});
