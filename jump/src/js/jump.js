@@ -2,8 +2,6 @@
 const canvas = document.getElementById("canvas");
 /** @type {CanvasRenderingContext2D} */
 const ctx = canvas.getContext("2d");
-canvas.width = window.innerWidth - 100;
-canvas.height = window.innerHeight - 100;
 
 // ctx.fillStyle = "green"; // 유닛 색상
 // ctx.fillRect(10, 10, 100, 100); // 왼쪽 위 (10, 10)에 100 * 100 사이즈 유닛
@@ -52,6 +50,14 @@ function 프레임마다실행() {
 
   // 실행할 내용
   ctx.clearRect(0, 0, canvas.width, canvas.height); // 프레임마다 캔버스 비우기
+  // 캔버스 크기 반응형으로
+  canvas.width = window.innerWidth - 20;
+  canvas.height = window.innerHeight - 20;
+  // 계속 위에 덧칠하는 구조
+  ctx.fillStyle = "#baa073";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#c7efff";
+  ctx.fillRect(0, 0, canvas.width, 250);
   if (timer % 120 === 0) {
     // 일정 프레임마다 새로운 장애물 생성
     const rock = new Rock();
