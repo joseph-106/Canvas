@@ -1,5 +1,5 @@
-// 그림 그리기 최소한의 코드
-const canvas = document.getElementById("canvas");
+// 그림 그리기 최소한의 코드 (TypeScript 사용시 <HTMLCanvasElement> 추가)
+const canvas = <HTMLCanvasElement>document.getElementById("canvas");
 /** @type {CanvasRenderingContext2D} */
 const ctx = canvas.getContext("2d");
 
@@ -25,7 +25,11 @@ const frog = {
 
 // 비슷한 종류의 객체들이 필요한 경우, 클래스로 만들자
 class Rock {
-  constructor(height) {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  constructor(height: number) {
     this.x = canvas.width - 100;
     this.y = 250 - height;
     this.width = 50;
@@ -41,13 +45,15 @@ const rocks = []; // 비슷한 객체들을 배열로 관리
 let timer = 0; // 전체 프레임 체크를 위한 타이머
 let 점프timer = 0; // 점프 프레임 체크를 위한 타이머
 let 점프중 = false; // 점프 상태
-let animation;
+let animation: number;
 
 // 프레임마다 코드 실행하기
 function 프레임마다실행() {
   animation = requestAnimationFrame(프레임마다실행);
   timer++;
-  document.getElementById("score").innerHTML = Math.floor(timer / 10); // 점수 표시
+  document.getElementById("score").innerHTML = `점수: ${Math.floor(
+    timer / 10
+  )}`; // 점수 표시
 
   // 실행할 내용
   ctx.clearRect(0, 0, canvas.width, canvas.height); // 프레임마다 캔버스 비우기
@@ -97,8 +103,11 @@ function 프레임마다실행() {
 
 프레임마다실행();
 
+// 객체 타입
+type objType = { x: number; y: number; width: number; height: number };
+
 // 충돌 체크 함수
-function 충돌체크(frog, rock) {
+function 충돌체크(frog: objType, rock: objType): void {
   if (frog.x + frog.width - rock.x > 0 && frog.y + frog.height - rock.y > 0) {
     cancelAnimationFrame(animation); // 애니메이션 종료
     alert(`점수: ${Math.floor(timer / 10)} 🐸`);
